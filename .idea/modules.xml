@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Frood.iml" filepath="$PROJECT_DIR$/Frood.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Frood-app/Frood-app.iml" filepath="$PROJECT_DIR$/Frood-app/Frood-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/googleplayservices_lib/googleplayservices_lib.iml" filepath="$PROJECT_DIR$/googleplayservices_lib/googleplayservices_lib.iml" />
+    </modules>
+  </component>
+</project>
+

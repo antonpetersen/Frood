@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/exploded-aar/Frood/googleplayservices_lib/unspecified/classes.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="5a22dd2604bd7678f8eb1514e89c1e588ca8901d">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/classes-a3db1c212f60078d68d4d092977c46763d65997e.jar" />
+    </item>
+    <item
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/exploded-aar/Frood/googleplayservices_lib/unspecified/libs/google-play-services.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="cebe8e4a3a469c4623addcca1dc571407ff3a08e">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/google-play-services-16843d6d69421d38e64f8aff25c9da46bdd00768.jar" />
+    </item>
+    <item
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/Parse-1.6.0.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="2a812174191af5a4513a873602a765b0171f252c">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/Parse-1.6.0-c666db8d0c89611f4e315818f845957a467a1b93.jar" />
+    </item>
+    <item
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/android-support-v4.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="307c1cc532eabbf1d135b43e5c983c9da700449d">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/android-support-v4-75e7e8201ed2f757165b29b5578d41d90fd3586e.jar" />
+    </item>
+
+</items>

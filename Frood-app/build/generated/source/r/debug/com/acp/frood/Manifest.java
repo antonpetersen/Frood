@@ -9,6 +9,7 @@ package com.acp.frood;
 
 public final class Manifest {
     public static final class permission {
+        public static final String C2D_MESSAGE="com.acp.frood.permission.C2D_MESSAGE";
         public static final String MAPS_RECEIVE="com.acp.frood.permission.MAPS_RECEIVE";
     }
 }

@@ -7,6 +7,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -72,7 +74,7 @@ public class PostActivity extends Activity {
   }
 
   private void post () {
-    String text = postEditText.getText().toString().trim();
+    final String text = postEditText.getText().toString().trim();
 
     // Set up a progress dialog
     final ProgressDialog dialog = new ProgressDialog(PostActivity.this);
@@ -100,6 +102,13 @@ public class PostActivity extends Activity {
         finish();
       }
     });
+
+    // Push the post
+    ParsePush push = new ParsePush();
+    push.setChannel("DTU");
+    push.setMessage(text);
+    push.sendInBackground();
+    Log.d("rofl push", "apps");
   }
 
   private String getPostEditTextText () {

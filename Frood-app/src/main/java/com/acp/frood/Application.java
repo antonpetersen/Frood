@@ -46,6 +46,7 @@ public class Application extends android.app.Application {
 
       PushService.setDefaultPushCallback(this, MainActivity.class);
 
+
     preferences = getSharedPreferences("com.acp.frood", Context.MODE_PRIVATE);
 
     configHelper = new ConfigHelper();

@@ -99,10 +99,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   private static final float OFFSET_CALCULATION_ACCURACY = 0.01f;
 
   // Maximum results returned from a Parse query
-  private static final int MAX_POST_SEARCH_RESULTS = 20;
+  private static final int MAX_POST_SEARCH_RESULTS = 50;
 
   // Maximum post search radius for map in kilometers
-  private static final int MAX_POST_SEARCH_DISTANCE = 100;
+  private static final int MAX_POST_SEARCH_DISTANCE = 500;
 
   /*
    * Other class member variables
@@ -122,7 +122,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   private int mostRecentMapUpdate;
   private boolean hasSetUpInitialLocation;
   private String selectedPostObjectId;
-  private Location lastLocation;
+  private Location lastLocation = new Location("");
   private Location currentLocation;
 
   // A request to connect to Location Services
@@ -156,6 +156,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Create a new location client, using the enclosing class to handle callbacks.
     locationClient = new LocationClient(this, this, this);
 
+    lastLocation.setLatitude(55.786096);
+    lastLocation.setLongitude(10.736059);
+
     // Set up a customized query
     ParseQueryAdapter.QueryFactory<FroodPost> factory =
         new ParseQueryAdapter.QueryFactory<FroodPost>() {
@@ -164,8 +167,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
             ParseQuery<FroodPost> query = FroodPost.getQuery();
             query.include("user");
             query.orderByDescending("createdAt");
-            query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius
-                * METERS_PER_FEET / METERS_PER_KILOMETER);
+            query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius * METERS_PER_FEET / METERS_PER_KILOMETER);
             query.setLimit(MAX_POST_SEARCH_RESULTS);
             return query;
           }

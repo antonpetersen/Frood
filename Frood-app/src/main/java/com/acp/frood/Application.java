@@ -46,7 +46,7 @@ public class Application extends android.app.Application {
 
       // Specify an Activity to handle all pushes by default.
 
-      PushService.setDefaultPushCallback(this, MainActivity.class);
+      /*PushService.setDefaultPushCallback(this, MainActivity.class);*/
 
 
     preferences = getSharedPreferences("com.acp.frood", Context.MODE_PRIVATE);
@@ -55,6 +55,7 @@ public class Application extends android.app.Application {
     configHelper.fetchConfigIfNeeded();
 
       ParsePush.subscribeInBackground("DTU");
+
   }
 
   public static float getSearchDistance() {

@@ -196,29 +196,43 @@ action#android.intent.action.USER_PRESENT
 ADDED from AndroidManifest.xml:97:17
 	android:name
 		ADDED from AndroidManifest.xml:97:25
-receiver#com.parse.GcmBroadcastReceiver
+receiver#com.parse.ParsePushBroadcastReceiver
 ADDED from AndroidManifest.xml:100:9
-	android:permission
-		ADDED from AndroidManifest.xml:101:13
+	android:exported
+		ADDED from AndroidManifest.xml:101:19
 	android:name
 		ADDED from AndroidManifest.xml:100:19
-intent-filter#com.acp.frood+com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION
+intent-filter#com.parse.push.intent.DELETE+com.parse.push.intent.OPEN+com.parse.push.intent.RECEIVE
 ADDED from AndroidManifest.xml:102:13
-action#com.google.android.c2dm.intent.RECEIVE
+action#com.parse.push.intent.RECEIVE
 ADDED from AndroidManifest.xml:103:17
 	android:name
 		ADDED from AndroidManifest.xml:103:25
-action#com.google.android.c2dm.intent.REGISTRATION
+action#com.parse.push.intent.DELETE
 ADDED from AndroidManifest.xml:104:17
 	android:name
 		ADDED from AndroidManifest.xml:104:25
-category#com.acp.frood
-ADDED from AndroidManifest.xml:109:17
+action#com.parse.push.intent.OPEN
+ADDED from AndroidManifest.xml:105:17
 	android:name
-		ADDED from AndroidManifest.xml:109:27
-meta-data#com.parse.push.notification_icon
-ADDED from AndroidManifest.xml:121:9
-	android:resource
-		ADDED from AndroidManifest.xml:121:68
+		ADDED from AndroidManifest.xml:105:25
+receiver#com.parse.GcmBroadcastReceiver
+ADDED from AndroidManifest.xml:108:9
+	android:permission
+		ADDED from AndroidManifest.xml:109:19
 	android:name
-		ADDED from AndroidManifest.xml:121:20
+		ADDED from AndroidManifest.xml:108:19
+intent-filter#com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION+com.parse.starter
+ADDED from AndroidManifest.xml:110:13
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from AndroidManifest.xml:111:17
+	android:name
+		ADDED from AndroidManifest.xml:111:25
+action#com.google.android.c2dm.intent.REGISTRATION
+ADDED from AndroidManifest.xml:112:17
+	android:name
+		ADDED from AndroidManifest.xml:112:25
+category#com.parse.starter
+ADDED from AndroidManifest.xml:117:17
+	android:name
+		ADDED from AndroidManifest.xml:117:27

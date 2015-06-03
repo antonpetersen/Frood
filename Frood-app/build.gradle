@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.0"
 
     defaultConfig {
-        applicationId "com.acp.frood"
+        applicationId "com.acp.frood" //"com.parse.anywall"
         minSdkVersion 11
         targetSdkVersion 19
     }
@@ -20,7 +20,6 @@ android {
 
 dependencies {
     compile project(':googleplayservices_lib')
+    compile files('libs/Parse-1.6.0.jar')
     compile files('libs/android-support-v4.jar')
-    compile 'com.parse.bolts:bolts-android:1.+'
-    compile fileTree(dir: 'libs', include: 'Parse-*.jar')
 }

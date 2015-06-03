@@ -84,8 +84,6 @@ public class PostActivity extends Activity {
     // Create a post.
     FroodPost post = new FroodPost();
 
-    post.put("lol", 123123);
-
     // Set the location to the current user's location
     post.setLocation(geoPoint);
     post.setText(text);
@@ -111,8 +109,6 @@ public class PostActivity extends Activity {
     push.setMessage(text);
     push.sendInBackground();
     Log.d("rofl push", "apps");
-
-
   }
 
   private String getPostEditTextText () {

@@ -77,11 +77,8 @@
     <string name="error_mismatched_passwords">enter the same password twice</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="eventDescription">Event Description</string>
-    <string name="eventHeading">Event Heading</string>
     <string name="login">Log in</string>
     <string name="logout_full">Log out of Frood</string>
-    <string name="mealDescription">Meal Description</string>
     <string name="parse">Parse</string>
     <string name="post">Post</string>
     <string name="post_out_of_range">Can\'t view post! Get closer.</string>

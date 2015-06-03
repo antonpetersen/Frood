@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.parse.Parse;
-import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
 import com.parse.PushService;
@@ -43,24 +42,26 @@ public class Application extends android.app.Application {
     Parse.initialize(this, "dORM0gNF0KpQknqoNHo004rozVcIMs1j3iRIMAgm",
             "aW4WJmenNxWk5gplNpuvPVYy9zUBZssu6NjAnwZc");
 
-      ParseInstallation.getCurrentInstallation().saveInBackground();
+      // Specify an Activity to handle all pushes by default.
 
-      ParsePush.subscribeInBackground("DTU", new SaveCallback() {
-          @Override
-          public void done(com.parse.ParseException e) {
-              if (e == null) {
-                  Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
-              } else {
-                  Log.e("com.parse.push", "failed to subscribe for push", e);
-              }
-          }
-      });
+      PushService.setDefaultPushCallback(this, MainActivity.class);
+
 
     preferences = getSharedPreferences("com.acp.frood", Context.MODE_PRIVATE);
 
     configHelper = new ConfigHelper();
     configHelper.fetchConfigIfNeeded();
 
+//      ParsePush.subscribeInBackground("", new SaveCallback() {
+//          @Override
+//          public void done(ParseException e) {
+//              if (e == null) {
+//                  Log.d("com.parse.push", "successfully subscribed to the broadcast channel.");
+//              } else {
+//                  Log.e("com.parse.push", "failed to subscribe for push", e);
+//              }
+//          }
+//      });
   }
 
   public static float getSearchDistance() {

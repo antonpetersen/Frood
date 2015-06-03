@@ -216,6 +216,26 @@ category#com.acp.frood
 ADDED from AndroidManifest.xml:109:17
 	android:name
 		ADDED from AndroidManifest.xml:109:27
+receiver#com.parse.ParsePushBroadcastReceiver
+ADDED from AndroidManifest.xml:112:9
+	android:exported
+		ADDED from AndroidManifest.xml:112:71
+	android:name
+		ADDED from AndroidManifest.xml:112:19
+intent-filter#com.parse.push.intent.DELETE+com.parse.push.intent.OPEN+com.parse.push.intent.RECEIVE
+ADDED from AndroidManifest.xml:113:13
+action#com.parse.push.intent.RECEIVE
+ADDED from AndroidManifest.xml:114:17
+	android:name
+		ADDED from AndroidManifest.xml:114:25
+action#com.parse.push.intent.DELETE
+ADDED from AndroidManifest.xml:115:17
+	android:name
+		ADDED from AndroidManifest.xml:115:25
+action#com.parse.push.intent.OPEN
+ADDED from AndroidManifest.xml:116:17
+	android:name
+		ADDED from AndroidManifest.xml:116:25
 meta-data#com.parse.push.notification_icon
 ADDED from AndroidManifest.xml:121:9
 	android:resource

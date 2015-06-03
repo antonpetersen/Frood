@@ -102,7 +102,7 @@ public class PostActivity extends Activity {
         finish();
       }
     });
-
+    // TODO Move logic to server side - to avoid users spamming - https://www.parse.com/docs/android/guide#push-notifications
     // Push the post
     ParsePush push = new ParsePush();
     push.setChannel("DTU");

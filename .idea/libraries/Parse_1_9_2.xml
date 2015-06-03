@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="Parse-1.6.0">
+  <library name="Parse-1.9.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/Frood-app/libs/Parse-1.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Frood-app/libs/Parse-1.9.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

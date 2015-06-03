@@ -16,4 +16,5 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-</LinearLayout><!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/frood_post_item.xml -->
+</LinearLayout>
+<!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/frood_post_item.xml -->

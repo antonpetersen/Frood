@@ -156,6 +156,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Create a new location client, using the enclosing class to handle callbacks.
     locationClient = new LocationClient(this, this, this);
 
+    // Default location (Denmark)
     lastLocation.setLatitude(55.786096);
     lastLocation.setLongitude(10.736059);
 
@@ -172,6 +173,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
             return query;
           }
         };
+
+
+    // TODO Her kan jeg sætte flere parametre ind på main skærmen (hører til "frood_post_item.xml"
 
     // Set up the query adapter
     postsQueryAdapter = new ParseQueryAdapter<FroodPost>(this, factory) {

@@ -106,7 +106,7 @@
     <string name="search_distance">Search Distance</string>
     <string name="settings_distance_format">%d feet</string>
     <string name="signup">Sign up</string>
-    <string name="slogan">Free food, stefan lugter</string>
+    <string name="slogan">Eat free and help save the planet</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="title_activity_login">Log in</string>

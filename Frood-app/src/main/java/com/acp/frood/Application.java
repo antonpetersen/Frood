@@ -2,15 +2,13 @@ package com.acp.frood;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
+
 
 import com.parse.Parse;
 import com.parse.ParseInstallation;
 import com.parse.ParseObject;
 import com.parse.ParsePush;
-import com.parse.PushService;
-import com.parse.SaveCallback;
-import java.text.ParseException;
+
 
 public class Application extends android.app.Application {
   // Debugging switch
@@ -43,6 +41,7 @@ public class Application extends android.app.Application {
     Parse.initialize(this, "dORM0gNF0KpQknqoNHo004rozVcIMs1j3iRIMAgm",
             "aW4WJmenNxWk5gplNpuvPVYy9zUBZssu6NjAnwZc");
     ParseInstallation.getCurrentInstallation().saveInBackground();
+
 
       // Specify an Activity to handle all pushes by default.
 

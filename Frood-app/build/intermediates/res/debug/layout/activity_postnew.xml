@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout">
 
         <EditText
             android:id="@+id/post_edittext"
@@ -39,10 +40,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <TimePicker
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/timePicker"/>
+            android:text="@string/pick_time"
+            android:onClick="showTimePickerDialog" />
 
         <Button
             android:id="@+id/post_button"
@@ -50,5 +52,6 @@
             android:layout_height="wrap_content"
             android:text="@string/post" />
     </LinearLayout>
+
 </RelativeLayout>
 <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/activity_postnew.xml -->

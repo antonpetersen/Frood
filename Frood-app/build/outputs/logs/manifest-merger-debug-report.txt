@@ -16,6 +16,7 @@ ADDED from AndroidManifest.xml:2:1
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
 MERGED from Frood:googleplayservices_lib:unspecified:7:5
+MERGED from com.android.support:appcompat-v7:18.0.0:18:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -92,6 +93,7 @@ ADDED from AndroidManifest.xml:38:5
 		ADDED from AndroidManifest.xml:39:9
 application
 ADDED from AndroidManifest.xml:42:5
+MERGED from com.android.support:appcompat-v7:18.0.0:19:5
 	android:label
 		ADDED from AndroidManifest.xml:46:9
 	android:allowBackup

@@ -1,12 +1,10 @@
 package com.acp.frood;
 
 import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -74,15 +72,6 @@ public class PostActivity extends Activity {
     updatePostButtonState();
     updateCharacterCountTextViewText();
   }
-
-// Select expiration time handler
-public void showDialog(View view)
-    {
-        DialogHandler dialogHandler = new DialogHandler();
-        dialogHandler.show(getSupportFragmentManager(), "time_picker");
-
-    }
-
 
   private void post () {
     final String text = postEditText.getText().toString().trim();

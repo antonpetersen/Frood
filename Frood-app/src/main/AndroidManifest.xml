@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="5"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <permission
@@ -97,14 +97,6 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver"
-                  android:exported="false">
-            <intent-filter>
-                <action android:name="com.parse.push.intent.RECEIVE" />
-                <action android:name="com.parse.push.intent.DELETE" />
-                <action android:name="com.parse.push.intent.OPEN" />
-            </intent-filter>
-        </receiver>
         <receiver android:name="com.parse.GcmBroadcastReceiver"
                   android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
@@ -112,9 +104,16 @@
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
                 <!--
-                  IMPORTANT: Change "com.parse.starter" to match your app's package name.
+                  IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name.
                 -->
-                <category android:name="com.parse.starter" />
+                <category android:name="com.acp.frood" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="com.parse.push.intent.RECEIVE" />
+                <action android:name="com.parse.push.intent.DELETE" />
+                <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
     </application>

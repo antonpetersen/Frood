@@ -8,8 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+        android:layout_centerHorizontal="true">
 
         <EditText
             android:id="@+id/post_edittext"
@@ -40,19 +39,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <Button
-            android:id="@+id/select_time"
+        <TimePicker
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pick_time"
-            android:onClick="showTimePickerDialog" />
+            android:id="@+id/timePicker"/>
 
         <Button
             android:id="@+id/post_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="showDialog"
             android:text="@string/post" />
     </LinearLayout>
-
 </RelativeLayout>

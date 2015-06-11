@@ -16,7 +16,6 @@ ADDED from AndroidManifest.xml:2:1
 uses-sdk
 ADDED from AndroidManifest.xml:7:5
 MERGED from Frood:googleplayservices_lib:unspecified:7:5
-MERGED from com.android.support:appcompat-v7:18.0.0:18:5
 	android:targetSdkVersion
 		ADDED from AndroidManifest.xml:9:9
 		INJECTED from AndroidManifest.xml:0:0
@@ -93,7 +92,6 @@ ADDED from AndroidManifest.xml:38:5
 		ADDED from AndroidManifest.xml:39:9
 application
 ADDED from AndroidManifest.xml:42:5
-MERGED from com.android.support:appcompat-v7:18.0.0:19:5
 	android:label
 		ADDED from AndroidManifest.xml:46:9
 	android:allowBackup
@@ -198,43 +196,43 @@ action#android.intent.action.USER_PRESENT
 ADDED from AndroidManifest.xml:97:17
 	android:name
 		ADDED from AndroidManifest.xml:97:25
-receiver#com.parse.GcmBroadcastReceiver
+receiver#com.parse.ParsePushBroadcastReceiver
 ADDED from AndroidManifest.xml:100:9
-	android:permission
+	android:exported
 		ADDED from AndroidManifest.xml:101:19
 	android:name
 		ADDED from AndroidManifest.xml:100:19
-intent-filter#com.acp.frood+com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION
+intent-filter#com.parse.push.intent.DELETE+com.parse.push.intent.OPEN+com.parse.push.intent.RECEIVE
 ADDED from AndroidManifest.xml:102:13
-action#com.google.android.c2dm.intent.RECEIVE
+action#com.parse.push.intent.RECEIVE
 ADDED from AndroidManifest.xml:103:17
 	android:name
 		ADDED from AndroidManifest.xml:103:25
-action#com.google.android.c2dm.intent.REGISTRATION
+action#com.parse.push.intent.DELETE
 ADDED from AndroidManifest.xml:104:17
 	android:name
 		ADDED from AndroidManifest.xml:104:25
-category#com.acp.frood
-ADDED from AndroidManifest.xml:109:17
-	android:name
-		ADDED from AndroidManifest.xml:109:27
-receiver#com.parse.ParsePushBroadcastReceiver
-ADDED from AndroidManifest.xml:112:9
-	android:exported
-		ADDED from AndroidManifest.xml:112:71
-	android:name
-		ADDED from AndroidManifest.xml:112:19
-intent-filter#com.parse.push.intent.DELETE+com.parse.push.intent.OPEN+com.parse.push.intent.RECEIVE
-ADDED from AndroidManifest.xml:113:13
-action#com.parse.push.intent.RECEIVE
-ADDED from AndroidManifest.xml:114:17
-	android:name
-		ADDED from AndroidManifest.xml:114:25
-action#com.parse.push.intent.DELETE
-ADDED from AndroidManifest.xml:115:17
-	android:name
-		ADDED from AndroidManifest.xml:115:25
 action#com.parse.push.intent.OPEN
-ADDED from AndroidManifest.xml:116:17
+ADDED from AndroidManifest.xml:105:17
 	android:name
-		ADDED from AndroidManifest.xml:116:25
+		ADDED from AndroidManifest.xml:105:25
+receiver#com.parse.GcmBroadcastReceiver
+ADDED from AndroidManifest.xml:108:9
+	android:permission
+		ADDED from AndroidManifest.xml:109:19
+	android:name
+		ADDED from AndroidManifest.xml:108:19
+intent-filter#com.google.android.c2dm.intent.RECEIVE+com.google.android.c2dm.intent.REGISTRATION+com.parse.starter
+ADDED from AndroidManifest.xml:110:13
+action#com.google.android.c2dm.intent.RECEIVE
+ADDED from AndroidManifest.xml:111:17
+	android:name
+		ADDED from AndroidManifest.xml:111:25
+action#com.google.android.c2dm.intent.REGISTRATION
+ADDED from AndroidManifest.xml:112:17
+	android:name
+		ADDED from AndroidManifest.xml:112:25
+category#com.parse.starter
+ADDED from AndroidManifest.xml:117:17
+	android:name
+		ADDED from AndroidManifest.xml:117:27

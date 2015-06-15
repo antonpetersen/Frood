@@ -196,9 +196,10 @@ containing a value of this type.
     public static final class id {
         public static final int LinearLayout1=0x7f0b000a;
         public static final int action_button=0x7f0b0009;
-        public static final int action_settings=0x7f0b001e;
+        public static final int action_settings=0x7f0b001f;
         public static final int character_count_textview=0x7f0b000f;
         public static final int content_view=0x7f0b001c;
+        public static final int createdat_view=0x7f0b001e;
         public static final int description_textview=0x7f0b0011;
         public static final int edittext_action_login=0x7f0b0008;
         public static final int edittext_action_signup=0x7f0b0018;

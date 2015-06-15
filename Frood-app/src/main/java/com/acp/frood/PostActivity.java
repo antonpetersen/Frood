@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -100,6 +101,11 @@ public class PostActivity extends Activity {
       public void done(ParseException e) {
         dialog.dismiss();
         finish();
+          // Set CountDownTimer
+
+
+
+
       }
     });
     // TODO Move logic to server side - to avoid users spamming - https://www.parse.com/docs/android/guide#push-notifications

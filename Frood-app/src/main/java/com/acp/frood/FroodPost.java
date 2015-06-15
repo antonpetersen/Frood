@@ -6,6 +6,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.Date;
+
 /**
  * Data model for a post.
  */
@@ -22,6 +24,9 @@ public class FroodPost extends ParseObject {
   public ParseUser getUser() {
     return getParseUser("user");
   }
+
+    //TODO add post.getCreatedAt method
+
 
   public void setUser(ParseUser value) {
     put("user", value);

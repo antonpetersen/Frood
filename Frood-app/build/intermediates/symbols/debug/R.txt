@@ -59,9 +59,10 @@ int drawable ic_plusone_standard_off_client 0x7f02001b
 int drawable ic_plusone_tall_off_client 0x7f02001c
 int id LinearLayout1 0x7f0b000a
 int id action_button 0x7f0b0009
-int id action_settings 0x7f0b001e
+int id action_settings 0x7f0b001f
 int id character_count_textview 0x7f0b000f
 int id content_view 0x7f0b001c
+int id createdat_view 0x7f0b001e
 int id description_textview 0x7f0b0011
 int id edittext_action_login 0x7f0b0008
 int id edittext_action_signup 0x7f0b0018

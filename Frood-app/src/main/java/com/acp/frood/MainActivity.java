@@ -1,5 +1,8 @@
 package com.acp.frood;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -13,6 +16,7 @@ import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -186,8 +190,15 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         }
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
+          TextView createdAtView = (TextView) view.findViewById(R.id.createdat_view);
         contentView.setText(post.getText());
         usernameView.setText(post.getUser().getUsername());
+          //TODO Inserted createdAt
+          Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+          String createdAtString = formatter.format(post.getCreatedAt());
+        createdAtView.setText(createdAtString);
+
+
         return view;
       }
     };
@@ -243,20 +254,21 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Set up the handler for the post button click
     Button postButton = (Button) findViewById(R.id.post_button);
     postButton.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        // Only allow posts if we have a location
-        Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
-        if (myLoc == null) {
-          Toast.makeText(MainActivity.this,
-              "Please try again after your location appears on the map.", Toast.LENGTH_LONG).show();
-          return;
-        }
+        public void onClick(View v) {
+            // Only allow posts if we have a location
+            Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
+            if (myLoc == null) {
+                Toast.makeText(MainActivity.this,
+                        "Please try again after your location appears on the map.", Toast.LENGTH_LONG).show();
+                return;
+            }
 
-        Intent intent = new Intent(MainActivity.this, PostActivity.class);
-        intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
-        startActivity(intent);
-      }
+            Intent intent = new Intent(MainActivity.this, PostActivity.class);
+            intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
+            startActivity(intent);
+        }
     });
+
   }
 
   /*
@@ -517,6 +529,8 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Set up additional query filters
     mapQuery.whereWithinKilometers("location", myPoint, MAX_POST_SEARCH_DISTANCE);
     mapQuery.include("user");
+      //TODO Hvad der vises på kortet??
+      mapQuery.include("createdAt");
     mapQuery.orderByDescending("createdAt");
     mapQuery.setLimit(MAX_POST_SEARCH_RESULTS);
     // Kick off the query in the background

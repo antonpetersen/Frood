@@ -4,6 +4,7 @@ android {
     compileSdkVersion 19
     buildToolsVersion "22.0.0"
 
+// TODO remove old package name
     defaultConfig {
         applicationId "com.acp.frood" //"com.parse.anywall"
         minSdkVersion 11

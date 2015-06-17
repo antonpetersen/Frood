@@ -19,5 +19,6 @@
     <string name="activity_post_title">Create a Post</string>
     <string name="character_count_placeholder">0/140</string>
     <string name="prompt_portions">Estimate of available portions</string>
+    <string name="attend">Attend!</string>
 
 </resources>

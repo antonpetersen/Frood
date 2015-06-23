@@ -22,6 +22,8 @@ import com.parse.ParsePush;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import java.util.Arrays;
+
 /**
  * Activity which displays a login screen to the user, offering registration as well.
  */
@@ -85,6 +87,8 @@ public class PostActivity extends Activity {
     // Create a post.
     FroodPost post = new FroodPost();
 
+
+
     // Set the location to the current user's location
     post.setLocation(geoPoint);
     post.setText(text);
@@ -95,18 +99,23 @@ public class PostActivity extends Activity {
     acl.setPublicReadAccess(true);
     post.setACL(acl);
 
+    // Set post creator to attend the "event"/post
+    post.add("attending", (post.get("user")));
+
+     // [{"__type":"Pointer","className":"_User","objectId":"uccQVO7eSb"}]
+
+
+
     // Save the post
     post.saveInBackground(new SaveCallback() {
-      @Override
-      public void done(ParseException e) {
-        dialog.dismiss();
-        finish();
-          // Set CountDownTimer
+        @Override
+        public void done(ParseException e) {
+            dialog.dismiss();
+            finish();
+            // TODO Set CountDownTimer
 
 
-
-
-      }
+        }
     });
     // TODO Move logic to server side - to avoid users spamming - https://www.parse.com/docs/android/guide#push-notifications
     // Push the post

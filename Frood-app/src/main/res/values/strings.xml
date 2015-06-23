@@ -20,5 +20,13 @@
     <string name="character_count_placeholder">0/140</string>
     <string name="prompt_portions">Estimate of available portions</string>
     <string name="attend">Attend!</string>
+    <string name="viewdetails">View details</string>
+    <string name="eventheader">Event header</string>
+
+    <string name="title_activity_view_details">ViewDetailsActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="hello_world">Hello world!</string>
+
 
 </resources>

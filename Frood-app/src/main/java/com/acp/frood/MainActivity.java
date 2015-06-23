@@ -2,7 +2,6 @@ package com.acp.frood;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +15,6 @@ import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -190,18 +188,23 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         }
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
-          TextView createdAtView = (TextView) view.findViewById(R.id.createdat_view);
+        TextView createdAtView = (TextView) view.findViewById(R.id.createdat_view);
+       // Button viewDetailsView = (Button) view.findViewById(R.id.view_details_btn);
         contentView.setText(post.getText());
         usernameView.setText(post.getUser().getUsername());
-          //TODO Inserted createdAt
-          Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-          String createdAtString = formatter.format(post.getCreatedAt());
+        //TODO Inserted createdAt
+        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        String createdAtString = formatter.format(post.getCreatedAt());
         createdAtView.setText(createdAtString);
-
+        //viewDetailsView.setOnClickListener();
 
         return view;
       }
     };
+
+/*      public void viewDetails(View view) {
+          Intent intent = new Intent(this, ViewDetailsActivity.class);
+      }*/
 
     // Disable automatic loading when the adapter is attached to a view.
     postsQueryAdapter.setAutoload(false);
@@ -213,42 +216,45 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     ListView postsListView = (ListView) findViewById(R.id.posts_listview);
     postsListView.setAdapter(postsQueryAdapter);
 
+
+    //TODO Make posts clickable and go to activity_post_details.xml
     // Set up the handler for an item's selection
     postsListView.setOnItemClickListener(new OnItemClickListener() {
-      public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        final FroodPost item = postsQueryAdapter.getItem(position);
-        selectedPostObjectId = item.getObjectId();
-        mapFragment.getMap().animateCamera(
-            CameraUpdateFactory.newLatLng(new LatLng(item.getLocation().getLatitude(), item
-                .getLocation().getLongitude())), new CancelableCallback() {
-              public void onFinish() {
-                Marker marker = mapMarkers.get(item.getObjectId());
-                if (marker != null) {
-                  marker.showInfoWindow();
-                }
-              }
 
-              public void onCancel() {
-              }
-            });
-        Marker marker = mapMarkers.get(item.getObjectId());
-        if (marker != null) {
-          marker.showInfoWindow();
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final FroodPost item = postsQueryAdapter.getItem(position);
+            selectedPostObjectId = item.getObjectId();
+            mapFragment.getMap().animateCamera(
+                    CameraUpdateFactory.newLatLng(new LatLng(item.getLocation().getLatitude(), item
+                            .getLocation().getLongitude())), new CancelableCallback() {
+                        public void onFinish() {
+                            Marker marker = mapMarkers.get(item.getObjectId());
+                            if (marker != null) {
+                                marker.showInfoWindow();
+                            }
+                        }
+
+                        public void onCancel() {
+                        }
+                    });
+            Marker marker = mapMarkers.get(item.getObjectId());
+            if (marker != null) {
+                marker.showInfoWindow();
+            }
         }
-      }
     });
 
     // Set up the map fragment
     mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
     // Enable the current location "blue dot"
     mapFragment.getMap().setMyLocationEnabled(true);
-    mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.786096,10.736059), 5.3f));
+    mapFragment.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(55.786096, 10.736059), 5.3f));
     // Set up the camera change handler
     mapFragment.getMap().setOnCameraChangeListener(new OnCameraChangeListener() {
-      public void onCameraChange(CameraPosition position) {
-        // When the camera changes, update the query
-        doMapQuery();
-      }
+        public void onCameraChange(CameraPosition position) {
+            // When the camera changes, update the query
+            doMapQuery();
+        }
     });
 
     // Set up the handler for the post button click
@@ -268,6 +274,31 @@ public class MainActivity extends FragmentActivity implements LocationListener,
             startActivity(intent);
         }
     });
+
+
+      // TODO Set up the handler for the view details button click
+
+/*      Button viewdetailsButton = (Button) findViewById(R.id.view_details_btn);
+
+      viewdetailsButton.setOnClickListener(new OnClickListener() {
+          public void onClick(View v) {
+              setContentView(R.layout.activity_view_details);
+          }
+      });*/
+
+/*      @Override
+      public boolean onCreateOptionsMenu(Menu menu) {
+          // Inflate the menu; this adds items to the action bar if it is present.
+          getMenuInflater().inflate(R.menu.main, menu);
+
+          menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
+              public boolean onMenuItemClick(MenuItem item) {
+                  startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                  return true;
+              }
+          });
+          return true;
+      }*/
 
   }
 
@@ -408,7 +439,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
    */
   public void onConnected(Bundle bundle) {
     if (Application.APPDEBUG) {
-      Log.d("Connected to location services", Application.APPTAG);
+      Log.d("Loc. services connected", Application.APPTAG);
     }
     currentLocation = getLocation();
     startPeriodicUpdates();
@@ -419,7 +450,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
    */
   public void onDisconnected() {
     if (Application.APPDEBUG) {
-      Log.d("Disconnected from location services", Application.APPTAG);
+      Log.d("Loc. service disconnect", Application.APPTAG);
     }
   }
 

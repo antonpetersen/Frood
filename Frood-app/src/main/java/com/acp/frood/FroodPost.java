@@ -6,6 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,7 +26,8 @@ public class FroodPost extends ParseObject {
     return getParseUser("user");
   }
 
-    //TODO add post.getCreatedAt method
+  //TODO set post creator to attend the "event"/post
+
 
 
   public void setUser(ParseUser value) {

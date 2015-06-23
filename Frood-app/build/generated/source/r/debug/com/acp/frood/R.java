@@ -251,8 +251,7 @@ containing a value of this type.
         public static final int activity_signup=0x7f040005;
         public static final int activity_view_details=0x7f040006;
         public static final int activity_welcome=0x7f040007;
-        public static final int fragment_view_details=0x7f040008;
-        public static final int frood_post_item=0x7f040009;
+        public static final int frood_post_item=0x7f040008;
     }
     public static final class menu {
         public static final int main=0x7f0a0000;

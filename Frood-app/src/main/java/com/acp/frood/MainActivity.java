@@ -563,7 +563,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     mapQuery.whereWithinKilometers("location", myPoint, MAX_POST_SEARCH_DISTANCE);
     mapQuery.include("user");
       //TODO Hvad der vises på kortet??
-      mapQuery.include("createdAt");
+      //mapQuery.include("createdAt");
     mapQuery.orderByDescending("createdAt");
     mapQuery.setLimit(MAX_POST_SEARCH_RESULTS);
     // Kick off the query in the background

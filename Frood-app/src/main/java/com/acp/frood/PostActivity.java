@@ -111,6 +111,7 @@ public class PostActivity extends Activity {
         @Override
         public void done(ParseException e) {
             dialog.dismiss();
+            Log.d("Saved???", "maybe");
             finish();
             // TODO Set CountDownTimer
 

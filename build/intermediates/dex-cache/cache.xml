@@ -2,17 +2,10 @@
 <items version="2" >
 
     <item
-        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/android-support-v4.jar"
-        jumboMode="false"
-        revision="22.0.0"
-        sha1="307c1cc532eabbf1d135b43e5c983c9da700449d">
-        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/android-support-v4-75e7e8201ed2f757165b29b5578d41d90fd3586e.jar" />
-    </item>
-    <item
         jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/exploded-aar/Frood/googleplayservices_lib/unspecified/classes.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="4b919a973b3de1c35c5c6d77739baa747b4a7766">
+        sha1="889342e192003e8e2799c32027f2eaa6028913bf">
         <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/classes-a3db1c212f60078d68d4d092977c46763d65997e.jar" />
     </item>
     <item
@@ -35,6 +28,13 @@
         revision="22.0.0"
         sha1="6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd">
         <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-cd5486aeba9dd5d465476071924fe54b639b640f.jar" />
+    </item>
+    <item
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/android-support-v4.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="307c1cc532eabbf1d135b43e5c983c9da700449d">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/android-support-v4-75e7e8201ed2f757165b29b5578d41d90fd3586e.jar" />
     </item>
 
 </items>

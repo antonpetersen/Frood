@@ -86,7 +86,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo" />
         <activity
-            android:name="com.acp.frood.PostActivity"
+            android:name="com.acp.frood.EventActivity"
             android:label="@string/activity_post_title"
             android:windowSoftInputMode="adjustResize" />
         <activity

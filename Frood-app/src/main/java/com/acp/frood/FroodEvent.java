@@ -6,14 +6,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
- * Data model for a post.
+ * Data model for an event.
  */
-@ParseClassName("Posts")
-public class FroodPost extends ParseObject {
+@ParseClassName("Events")
+public class FroodEvent extends ParseObject {
   public String getText() {
     return getString("text");
   }
@@ -26,7 +23,7 @@ public class FroodPost extends ParseObject {
     return getParseUser("user");
   }
 
-  //TODO set post creator to attend the "event"/post
+  //TODO set event creator to attend the event
 
 
 
@@ -42,7 +39,7 @@ public class FroodPost extends ParseObject {
     put("location", value);
   }
 
-  public static ParseQuery<FroodPost> getQuery() {
-    return ParseQuery.getQuery(FroodPost.class);
+  public static ParseQuery<FroodEvent> getQuery() {
+    return ParseQuery.getQuery(FroodEvent.class);
   }
 }

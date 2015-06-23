@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -22,92 +21,90 @@ import com.parse.ParsePush;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
-import java.util.Arrays;
-
 /**
  * Activity which displays a login screen to the user, offering registration as well.
  */
-public class PostActivity extends Activity {
+public class EventActivity extends Activity {
   // UI references.
-  private EditText postEditText;
+  private EditText eventEditText;
   private TextView characterCountTextView;
-  private Button postButton;
+  private Button eventButton;
 
-  private int maxCharacterCount = Application.getConfigHelper().getPostMaxCharacterCount();
+  private int maxCharacterCount = Application.getConfigHelper().getEventMaxCharacterCount();
   private ParseGeoPoint geoPoint;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.activity_post);
+    setContentView(R.layout.activity_event);
 
     Intent intent = getIntent();
     Location location = intent.getParcelableExtra(Application.INTENT_EXTRA_LOCATION);
     geoPoint = new ParseGeoPoint(location.getLatitude(), location.getLongitude());
 
-    postEditText = (EditText) findViewById(R.id.post_edittext);
-    postEditText.addTextChangedListener(new TextWatcher() {
-      @Override
-      public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-      }
+    eventEditText = (EditText) findViewById(R.id.event_edittext);
+    eventEditText.addTextChangedListener(new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
 
-      @Override
-      public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-      }
+        @Override
+        public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+        }
 
-      @Override
-      public void afterTextChanged(Editable s) {
-        updatePostButtonState();
-        updateCharacterCountTextViewText();
-      }
+        @Override
+        public void afterTextChanged(Editable s) {
+            updateEventButtonState();
+            updateCharacterCountTextViewText();
+        }
     });
 
     characterCountTextView = (TextView) findViewById(R.id.character_count_textview);
 
-    postButton = (Button) findViewById(R.id.post_button);
-    postButton.setOnClickListener(new OnClickListener() {
-      public void onClick(View v) {
-        post();
-      }
+    eventButton = (Button) findViewById(R.id.event_button);
+    eventButton.setOnClickListener(new OnClickListener() {
+        public void onClick(View v) {
+            event();
+        }
     });
 
-    updatePostButtonState();
+    updateEventButtonState();
     updateCharacterCountTextViewText();
   }
 
-  private void post () {
-    final String text = postEditText.getText().toString().trim();
+  private void event() {
+    final String text = eventEditText.getText().toString().trim();
 
     // Set up a progress dialog
-    final ProgressDialog dialog = new ProgressDialog(PostActivity.this);
-    dialog.setMessage(getString(R.string.progress_post));
+    final ProgressDialog dialog = new ProgressDialog(EventActivity.this);
+    dialog.setMessage(getString(R.string.progress_event));
     dialog.show();
 
-    // Create a post.
-    FroodPost post = new FroodPost();
+    // Create a event.
+    FroodEvent event = new FroodEvent();
 
 
 
     // Set the location to the current user's location
-    post.setLocation(geoPoint);
-    post.setText(text);
-    post.setUser(ParseUser.getCurrentUser());
+    event.setLocation(geoPoint);
+    event.setText(text);
+    event.setUser(ParseUser.getCurrentUser());
     ParseACL acl = new ParseACL();
 
     // Give public read access
     acl.setPublicReadAccess(true);
-    post.setACL(acl);
+    event.setACL(acl);
 
-    // Set post creator to attend the "event"/post
-    post.add("attending", (post.get("user")));
+    // Set event creator to attend the "event"/event
+    event.add("attending", (event.get("user")));
 
      // [{"__type":"Pointer","className":"_User","objectId":"uccQVO7eSb"}]
 
 
 
-    // Save the post
-    post.saveInBackground(new SaveCallback() {
+    // Save the event
+    event.saveInBackground(new SaveCallback() {
         @Override
         public void done(ParseException e) {
             dialog.dismiss();
@@ -119,7 +116,7 @@ public class PostActivity extends Activity {
         }
     });
     // TODO Move logic to server side - to avoid users spamming - https://www.parse.com/docs/android/guide#push-notifications
-    // Push the post
+    // Push the event
     ParsePush push = new ParsePush();
     push.setChannel("DTU");
     push.setMessage(text);
@@ -127,18 +124,18 @@ public class PostActivity extends Activity {
     Log.d("rofl push", "apps");
   }
 
-  private String getPostEditTextText () {
-    return postEditText.getText().toString().trim();
+  private String getEventEditTextText() {
+    return eventEditText.getText().toString().trim();
   }
 
-  private void updatePostButtonState () {
-    int length = getPostEditTextText().length();
+  private void updateEventButtonState() {
+    int length = getEventEditTextText().length();
     boolean enabled = length > 0 && length < maxCharacterCount;
-    postButton.setEnabled(enabled);
+    eventButton.setEnabled(enabled);
   }
 
   private void updateCharacterCountTextViewText () {
-    String characterCountString = String.format("%d/%d", postEditText.length(), maxCharacterCount);
+    String characterCountString = String.format("%d/%d", eventEditText.length(), maxCharacterCount);
     characterCountTextView.setText(characterCountString);
   }
 }

@@ -86,22 +86,18 @@
     <string name="error_mismatched_passwords">enter the same password twice</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
     <eat-comment/>
+    <string name="event">Post</string>
     <string name="eventheader">Event header</string>
     <string name="hello_world">Hello world!</string>
     <string name="login">Log in</string>
     <string name="logout_full">Log out of Frood</string>
     <string name="parse">Parse</string>
-    <string name="post">Post</string>
     <string name="post_out_of_range">Can\'t view post! Get closer.</string>
     <string name="powered_by">Powered by</string>
+    <string name="progress_event">Posting…</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="progress_login">Logging you in…</string>
-    <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
-    <eat-comment/>
-    <string name="progress_post">Posting…</string>
-    <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings_activity_login.xml -->
-    <eat-comment/>
     <string name="progress_signup">Signing you up…</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_password_again">Password Again</string>

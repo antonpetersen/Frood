@@ -6,11 +6,11 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PostActivity"
+    tools:context=".EventActivity"
               android:orientation="vertical">
 
     <EditText
-        android:id="@+id/post_edittext"
+        android:id="@+id/event_edittext"
         android:layout_width="fill_parent"
         android:layout_height="250dp"
         android:background="@null"
@@ -43,9 +43,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <Button
-        android:id="@+id/post_button"
+        android:id="@+id/event_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/post" />
+        android:text="@string/event" />
 
-</LinearLayout><!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/activity_post.xml -->
+</LinearLayout>

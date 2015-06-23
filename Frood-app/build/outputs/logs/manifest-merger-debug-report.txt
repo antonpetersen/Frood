@@ -174,7 +174,7 @@ ADDED from AndroidManifest.xml:83:9
 		ADDED from AndroidManifest.xml:87:13
 	android:name
 		ADDED from AndroidManifest.xml:84:13
-activity#com.acp.frood.PostActivity
+activity#com.acp.frood.EventActivity
 ADDED from AndroidManifest.xml:88:9
 	android:windowSoftInputMode
 		ADDED from AndroidManifest.xml:91:13

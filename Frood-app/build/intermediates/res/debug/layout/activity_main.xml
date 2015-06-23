@@ -11,10 +11,10 @@
     tools:context=".MainActivity" >
 
     <Button
-        android:id="@+id/post_button"
+        android:id="@+id/event_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/post"
+        android:text="@string/event"
         android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
     <fragment
@@ -26,7 +26,7 @@
         android:layout_marginTop="16dp" />
 
     <ListView
-        android:id="@+id/posts_listview"
+        android:id="@+id/events_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_weight="1" />

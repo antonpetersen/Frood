@@ -17,7 +17,7 @@ public class Application extends android.app.Application {
   // Debugging tag for the application
   public static final String APPTAG = "Frood";
 
-  // Used to pass location from MainActivity to PostActivity
+  // Used to pass location from MainActivity to EventActivity
   public static final String INTENT_EXTRA_LOCATION = "location";
 
   // Key for saving the search distance preference
@@ -37,7 +37,7 @@ public class Application extends android.app.Application {
 
     super.onCreate();
 
-    ParseObject.registerSubclass(FroodPost.class);
+    ParseObject.registerSubclass(FroodEvent.class);
     Parse.initialize(this, "dORM0gNF0KpQknqoNHo004rozVcIMs1j3iRIMAgm",
             "aW4WJmenNxWk5gplNpuvPVYy9zUBZssu6NjAnwZc");
     ParseInstallation.getCurrentInstallation().saveInBackground();

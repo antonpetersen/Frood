@@ -43,12 +43,12 @@
             android:orientation="horizontal">
 
 
-        <Button
+ <!--       <Button
             android:id="@+id/view_details_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:text="@string/viewdetails"/>
+            android:text="@string/viewdetails"/>-->
 
         </LinearLayout>
 

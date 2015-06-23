@@ -257,6 +257,8 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         }
     });
 
+
+  // TODO Idea: Hijact this button to try and display the view details activity
     // Set up the handler for the post button click
     Button postButton = (Button) findViewById(R.id.post_button);
     postButton.setOnClickListener(new OnClickListener() {

@@ -246,3 +246,9 @@ action#com.parse.push.intent.OPEN
 ADDED from AndroidManifest.xml:121:17
 	android:name
 		ADDED from AndroidManifest.xml:121:25
+activity#com.acp.frood.ViewDetailsActivity
+ADDED from AndroidManifest.xml:125:9
+	android:label
+		ADDED from AndroidManifest.xml:127:13
+	android:name
+		ADDED from AndroidManifest.xml:126:13

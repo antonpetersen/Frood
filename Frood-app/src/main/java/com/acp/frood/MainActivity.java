@@ -15,6 +15,7 @@ import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -52,6 +53,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
@@ -199,9 +201,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         viewDetailsView.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 Log.d("debug", event.getText());
-//                Intent intent = new Intent(MainActivity.this, EventActivity.class);
-//                intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, ViewDetailsActivity.class);
+                intent.putExtra("eventID", event.getObjectId());
+                startActivity(intent);
             }});
 
         return view;
@@ -279,30 +281,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         }
     });
 
-
-      // TODO Set up the handler for the view details button click
-
-/*      Button viewdetailsButton = (Button) findViewById(R.id.view_details_btn);
-
-      viewdetailsButton.setOnClickListener(new OnClickListener() {
-          public void onClick(View v) {
-              setContentView(R.layout.activity_view_details);
-          }
-      });*/
-
-/*      @Override
-      public boolean onCreateOptionsMenu(Menu menu) {
-          // Inflate the menu; this adds items to the action bar if it is present.
-          getMenuInflater().inflate(R.menu.main, menu);
-
-          menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-              public boolean onMenuItemClick(MenuItem item) {
-                  startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                  return true;
-              }
-          });
-          return true;
-      }*/
 
   }
 

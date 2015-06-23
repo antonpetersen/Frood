@@ -96,8 +96,11 @@ public class EventActivity extends Activity {
     acl.setPublicReadAccess(true);
     event.setACL(acl);
 
-    // Set event creator to attend the "event"/event
-    event.add("attending", (event.get("user")));
+      // Set event creator to attend the "event"/event
+//    event.add("attending", (event.get("user")));
+
+      //
+
 
      // [{"__type":"Pointer","className":"_User","objectId":"uccQVO7eSb"}]
 

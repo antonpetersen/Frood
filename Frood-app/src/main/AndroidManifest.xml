@@ -122,6 +122,10 @@
             </intent-filter>
         </receiver>
 
+        <activity
+            android:name=".ViewDetailsActivity"
+            android:label="@string/title_activity_view_details" >
+        </activity>
     </application>
 
 </manifest>

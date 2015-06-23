@@ -17,7 +17,9 @@ public class FroodEvent extends ParseObject {
 
   public void setText(String value) {
     put("text", value);
+    put("attendees", 0);
   }
+
 
   public ParseUser getUser() {
     return getParseUser("user");

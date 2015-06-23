@@ -205,20 +205,19 @@ containing a value of this type.
     public static final class id {
         public static final int LinearLayout1=0x7f0b000d;
         public static final int action_button=0x7f0b000c;
-        public static final int action_settings=0x7f0b0023;
-        public static final int attendButton=0x7f0b001c;
+        public static final int action_settings=0x7f0b0021;
+        public static final int attend_btn=0x7f0b001a;
         public static final int character_count_textview=0x7f0b0006;
-        public static final int content_view=0x7f0b001a;
-        public static final int createdat_view=0x7f0b0021;
+        public static final int content_view=0x7f0b0018;
+        public static final int createdat_view=0x7f0b001f;
         public static final int description_textview=0x7f0b0010;
         public static final int edittext_action_login=0x7f0b000b;
         public static final int edittext_action_signup=0x7f0b0017;
         public static final int event_button=0x7f0b0007;
         public static final int event_edittext=0x7f0b0005;
-        public static final int event_heading_view=0x7f0b0019;
         public static final int events_listview=0x7f0b000f;
         public static final int hybrid=0x7f0b0000;
-        public static final int login_button=0x7f0b001d;
+        public static final int login_button=0x7f0b001b;
         public static final int login_form=0x7f0b0008;
         public static final int logout_button=0x7f0b0012;
         public static final int map_fragment=0x7f0b000e;
@@ -229,16 +228,15 @@ containing a value of this type.
         public static final int password_edit_text=0x7f0b0015;
         public static final int satellite=0x7f0b0003;
         public static final int searchdistance_radiogroup=0x7f0b0011;
-        public static final int signup_button=0x7f0b001e;
+        public static final int signup_button=0x7f0b001c;
         public static final int signup_form=0x7f0b0013;
         public static final int terrain=0x7f0b0004;
-        public static final int textView2=0x7f0b001b;
-        public static final int textview_3=0x7f0b001f;
+        public static final int textView2=0x7f0b0019;
+        public static final int textview_3=0x7f0b001d;
         public static final int username=0x7f0b0009;
         public static final int username_edit_text=0x7f0b0014;
-        public static final int username_view=0x7f0b0020;
-        public static final int viewDetails=0x7f0b0018;
-        public static final int view_details_btn=0x7f0b0022;
+        public static final int username_view=0x7f0b001e;
+        public static final int view_details_btn=0x7f0b0020;
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f070000;
@@ -255,6 +253,7 @@ containing a value of this type.
     }
     public static final class menu {
         public static final int main=0x7f0a0000;
+        public static final int menu_view_details=0x7f0a0001;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;

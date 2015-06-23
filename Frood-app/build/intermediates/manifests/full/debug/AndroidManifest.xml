@@ -121,6 +121,11 @@
                 <action android:name="com.parse.push.intent.OPEN" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name="com.acp.frood.ViewDetailsActivity"
+            android:label="@string/title_activity_view_details" >
+        </activity>
     </application>
 
 </manifest>

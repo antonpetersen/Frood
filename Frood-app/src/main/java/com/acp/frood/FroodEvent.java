@@ -7,7 +7,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 /**
- * Data model for an event. - NOT CURRENTLY IN USE
+ * Data model for an event.
  */
 @ParseClassName("Events")
 public class FroodEvent extends ParseObject {

@@ -29,12 +29,14 @@
 
             <TextView
                 android:id="@+id/username_view"
+                android:text="Username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             <TextView
                 android:id="@+id/createdat_view"
+                android:text="Created at"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"/>

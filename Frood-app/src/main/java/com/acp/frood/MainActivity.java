@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -193,16 +194,16 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         TextView createdAtView = (TextView) view.findViewById(R.id.createdat_view);
         Button viewDetailsView = (Button) view.findViewById(R.id.view_details_btn);
         contentView.setText(event.getText());
-        usernameView.setText(event.getUser().getUsername());
+        usernameView.setText("Shared by: " + event.getUser().getUsername());
         //TODO Inserted createdAt
         Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         String createdAtString = formatter.format(event.getCreatedAt());
-        createdAtView.setText(createdAtString);
-        viewDetailsView.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
-                Log.d("debug", event.getText());
-                Intent intent = new Intent(MainActivity.this, ViewDetailsActivity.class);
-                intent.putExtra("eventID", event.getObjectId());
+        createdAtView.setText("Time of creation: " + createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
+          viewDetailsView.setOnClickListener(new OnClickListener() {
+              public void onClick(View v) {
+                  Log.d("debug", event.getText());
+                  Intent intent = new Intent(MainActivity.this, ViewDetailsActivity.class);
+                  intent.putExtra("eventID", event.getObjectId());
                 startActivity(intent);
             }});
 

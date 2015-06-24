@@ -27,6 +27,7 @@ import java.util.Queue;
 public class ViewDetailsActivity extends Activity {
 
     FroodEvent fe;
+    int attendeeCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,9 @@ public class ViewDetailsActivity extends Activity {
                     TextView test = (TextView) findViewById(R.id.content_view);
                     test.setText(event.getText());
                     fe = event;
+
+                    // Set attendeeCount
+
                     // Set Toggle Button status
                     ParseQuery<ParseObject> attendQuery = ParseQuery.getQuery("Attending");
                     attendQuery.whereEqualTo("user", ParseUser.getCurrentUser());
@@ -86,6 +90,8 @@ public class ViewDetailsActivity extends Activity {
             fe.saveInBackground();
             Log.d(fe.getText(), "fe INCREMENT coming through+??");
 
+            // Refresh attendeeCount
+
         }else{
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Attending");
             query.whereEqualTo("user", ParseUser.getCurrentUser());
@@ -98,6 +104,8 @@ public class ViewDetailsActivity extends Activity {
                     fe.increment("attendees", -1);
                     fe.saveInBackground();
                     Log.d(fe.getText(), "fe decrement coming through+??");
+
+                    // Refresh attendeeCount
                 }
             });
         }

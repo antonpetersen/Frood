@@ -18,13 +18,13 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal"/>-->
-    <!--<fragment
-        android:id="@+id/map_fragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:layout_marginTop="16dp" />-->
+    <!--<fragment-->
+        <!--android:id="@+id/map_fragment"-->
+        <!--android:name="com.google.android.gms.maps.SupportMapFragment"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_weight="2"-->
+        <!--android:layout_marginTop="16dp" />-->
 
 
     <TextView
@@ -41,7 +41,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="16dp"
+        android:layout_weight="1">
 
         <TextView
             android:layout_width="wrap_content"

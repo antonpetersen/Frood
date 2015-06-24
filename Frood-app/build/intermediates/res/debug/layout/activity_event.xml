@@ -7,12 +7,13 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".EventActivity"
-              android:orientation="vertical">
+    android:orientation="vertical">
+
 
     <EditText
         android:id="@+id/event_edittext"
         android:layout_width="fill_parent"
-        android:layout_height="250dp"
+        android:layout_height="200dp"
         android:background="@null"
         android:hint="@string/prompt_post"
         android:inputType="textMultiLine"
@@ -34,18 +35,29 @@
     </EditText>
     -->
 
-    <TextView
-        android:id="@+id/character_count_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:text="@string/character_count_placeholder"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
 
-    <Button
-        android:id="@+id/event_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/event" />
+        <TextView
+            android:id="@+id/character_count_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/character_count_placeholder"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:gravity="center_vertical|center_horizontal"/>
 
-</LinearLayout><!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/activity_event.xml -->
+        <Button
+            android:id="@+id/event_button"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/event"
+            android:gravity="center_vertical"/>
+    </RelativeLayout>
+
+</LinearLayout>
+<!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/activity_event.xml -->

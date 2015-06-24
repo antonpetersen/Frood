@@ -166,10 +166,11 @@ int string settings_distance_format 0x7f080038
 int string signup 0x7f080039
 int string slogan 0x7f08003a
 int string title_activity_login 0x7f08003b
-int string title_activity_settings 0x7f08003c
-int string title_activity_signup 0x7f08003d
-int string title_activity_view_details 0x7f08003e
-int string viewdetails 0x7f08003f
+int string title_activity_main 0x7f08003c
+int string title_activity_settings 0x7f08003d
+int string title_activity_signup 0x7f08003e
+int string title_activity_view_details 0x7f08003f
+int string viewdetails 0x7f080040
 int style AppBaseTheme 0x7f090000
 int style AppTheme 0x7f090001
 int style ButtonBar 0x7f090002

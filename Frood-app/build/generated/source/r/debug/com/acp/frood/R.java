@@ -319,10 +319,11 @@ containing a value of this type.
         public static final int signup=0x7f080039;
         public static final int slogan=0x7f08003a;
         public static final int title_activity_login=0x7f08003b;
-        public static final int title_activity_settings=0x7f08003c;
-        public static final int title_activity_signup=0x7f08003d;
-        public static final int title_activity_view_details=0x7f08003e;
-        public static final int viewdetails=0x7f08003f;
+        public static final int title_activity_main=0x7f08003c;
+        public static final int title_activity_settings=0x7f08003d;
+        public static final int title_activity_signup=0x7f08003e;
+        public static final int title_activity_view_details=0x7f08003f;
+        public static final int viewdetails=0x7f080040;
     }
     public static final class style {
         /** 

@@ -12,7 +12,7 @@ import com.parse.ParsePush;
 
 public class Application extends android.app.Application {
   // Debugging switch
-  public static final boolean APPDEBUG = false;
+  public static final boolean APPDEBUG = true;
 
   // Debugging tag for the application
   public static final String APPTAG = "Frood";
@@ -23,7 +23,7 @@ public class Application extends android.app.Application {
   // Key for saving the search distance preference
   private static final String KEY_SEARCH_DISTANCE = "searchDistance";
 
-  private static final float DEFAULT_SEARCH_DISTANCE = 250.0f;
+  private static final float DEFAULT_SEARCH_DISTANCE = 2500.0f; //original value ="250.0f"
 
   private static SharedPreferences preferences;
 

@@ -106,7 +106,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   private static final int MAX_EVENT_SEARCH_RESULTS = 50;
 
   // Maximum post search radius for map in kilometers
-  private static final int MAX_EVENT_SEARCH_DISTANCE = 500;
+  private static final int MAX_EVENT_SEARCH_DISTANCE = 5; //was "50"
 
   /*
    * Other class member variables
@@ -652,9 +652,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
       mapCircle =
           mapFragment.getMap().addCircle(
               new CircleOptions().center(myLatLng).radius(radius * METERS_PER_FEET));
-      int baseColor = Color.DKGRAY;
+  int baseColor = Color.WHITE;                                                                        //was ".DKGRAY"
       mapCircle.setStrokeColor(baseColor);
-      mapCircle.setStrokeWidth(2);
+      mapCircle.setStrokeWidth(0);                                                                     //was "2"
       mapCircle.setFillColor(Color.argb(50, Color.red(baseColor), Color.green(baseColor),
           Color.blue(baseColor)));
     }

@@ -22,7 +22,7 @@
     <string name="attend">Attend!</string>
     <string name="viewdetails">View details</string>
     <string name="eventheader">Event header</string>
-    <string name="title_activity_view_details">ViewDetailsActivity</string>
+    <string name="title_activity_view_details">Event details</string>
     <string name="title_activity_main">Nearby meal opportunities</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>

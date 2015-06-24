@@ -126,7 +126,7 @@
     <string name="title_activity_signup">Sign up</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="title_activity_view_details">ViewDetailsActivity</string>
+    <string name="title_activity_view_details">Event details</string>
     <string name="viewdetails">View details</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/styles.xml -->
     <eat-comment/>

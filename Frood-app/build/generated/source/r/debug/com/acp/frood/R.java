@@ -207,6 +207,7 @@ containing a value of this type.
         public static final int action_button=0x7f0b000c;
         public static final int action_settings=0x7f0b0021;
         public static final int attend_btn=0x7f0b001a;
+        public static final int attendee_count=0x7f0b0019;
         public static final int character_count_textview=0x7f0b0006;
         public static final int content_view=0x7f0b0018;
         public static final int createdat_view=0x7f0b001f;
@@ -231,7 +232,6 @@ containing a value of this type.
         public static final int signup_button=0x7f0b001c;
         public static final int signup_form=0x7f0b0013;
         public static final int terrain=0x7f0b0004;
-        public static final int textView2=0x7f0b0019;
         public static final int textview_3=0x7f0b001d;
         public static final int username=0x7f0b0009;
         public static final int username_edit_text=0x7f0b0014;

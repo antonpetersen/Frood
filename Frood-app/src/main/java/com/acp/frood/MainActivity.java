@@ -161,9 +161,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Create a new location client, using the enclosing class to handle callbacks.
     locationClient = new LocationClient(this, this, this);
 
-    // Default location (Denmark)
-    lastLocation.setLatitude(55.786096);
-    lastLocation.setLongitude(10.736059);
+    // Default location (DTU, Denmark)
+    lastLocation.setLatitude(55.78402);
+    lastLocation.setLongitude(12.52029);
 
     // Set up a customized query
     ParseQueryAdapter.QueryFactory<FroodEvent> factory =
@@ -198,7 +198,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         //TODO Inserted createdAt
         Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
         String createdAtString = formatter.format(event.getCreatedAt());
-        createdAtView.setText("Time of creation: " + createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
+        createdAtView.setText(createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
           viewDetailsView.setOnClickListener(new OnClickListener() {
               public void onClick(View v) {
                   Log.d("debug", event.getText());

@@ -23,6 +23,13 @@
         <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/Parse-1.9.2-bc44816b9b65f6d6ed5f822138608056bdb4e0d8.jar" />
     </item>
     <item
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/android-support-v4.jar"
+        jumboMode="false"
+        revision="22.0.0"
+        sha1="307c1cc532eabbf1d135b43e5c983c9da700449d">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/android-support-v4-75e7e8201ed2f757165b29b5578d41d90fd3586e.jar" />
+    </item>
+    <item
         jar="/Users/anton/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.2.0/6ee2953ccf51ce72b6d548c30c4633b99eb4f9dd/bolts-android-1.2.0.jar"
         jumboMode="false"
         revision="22.0.0"
@@ -30,11 +37,11 @@
         <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/bolts-android-1.2.0-cd5486aeba9dd5d465476071924fe54b639b640f.jar" />
     </item>
     <item
-        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/android-support-v4.jar"
+        jar="/Users/anton/AndroidStudioProjects/Frood/Frood-app/libs/joda-time-2.8.1.jar"
         jumboMode="false"
         revision="22.0.0"
-        sha1="307c1cc532eabbf1d135b43e5c983c9da700449d">
-        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/android-support-v4-75e7e8201ed2f757165b29b5578d41d90fd3586e.jar" />
+        sha1="f5bfc718c95a7b1d3c371bb02a188a4df18361a9">
+        <dex dex="/Users/anton/AndroidStudioProjects/Frood/Frood-app/build/intermediates/pre-dexed/debug/joda-time-2.8.1-79d8cd63cfcb44589cd25e208c36947d94109118.jar" />
     </item>
 
 </items>

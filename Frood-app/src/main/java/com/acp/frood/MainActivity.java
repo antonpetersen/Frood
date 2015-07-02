@@ -64,6 +64,11 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
+
 public class MainActivity extends FragmentActivity implements LocationListener,
     GooglePlayServicesClient.ConnectionCallbacks,
     GooglePlayServicesClient.OnConnectionFailedListener {
@@ -203,29 +208,25 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         usernameView.setText("Shared by: " + event.getUser().getUsername());
 
         //TODO Get elapsed time since creation
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-        Date currentTime = (new Date());
-        Date createdAt = event.getCreatedAt();
+          DateTime createdAt = new DateTime(event.getCreatedAt());
+          DateTime now = new DateTime();
+          Period period = new Period(createdAt, now);
 
-          long difference = createdAt.getTime() - currentTime.getTime();
-          int days = (int) (difference / (1000*60*60*24));
-          int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
-          int mins = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
+          PeriodFormatter formatter = new PeriodFormatterBuilder()
+                  .appendMinutes().appendSuffix(" minutes ago\n")
+                  .appendHours().appendSuffix(" hours ago\n")
+                  .appendDays().appendSuffix(" days ago\n")
+                  .printZeroNever()
+                  .toFormatter();
 
-          String differenceString = sdf.format(hours);
-
-          Date myDate = new Date(difference);
-
-          String diff = sdf.format(myDate);
-
-          createdAtView.setText(diff);
-
-
+          String elapsed = formatter.print(period);
+          createdAtView.setText(elapsed);
 
 
 //        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
 //        String createdAtString = formatter.format(event.getCreatedAt());
 //        createdAtView.setText(createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
+
           viewDetailsView.setOnClickListener(new OnClickListener() {
               public void onClick(View v) {
                   Log.d("debug", event.getText());

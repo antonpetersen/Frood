@@ -1,12 +1,17 @@
 package com.acp.frood;
 
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -19,6 +24,7 @@ import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -195,17 +201,39 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         Button viewDetailsView = (Button) view.findViewById(R.id.view_details_btn);
         contentView.setText(event.getText());
         usernameView.setText("Shared by: " + event.getUser().getUsername());
-        //TODO Inserted createdAt
-        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-        String createdAtString = formatter.format(event.getCreatedAt());
-        createdAtView.setText(createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
+
+        //TODO Get elapsed time since creation
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+        Date currentTime = (new Date());
+        Date createdAt = event.getCreatedAt();
+
+          long difference = createdAt.getTime() - currentTime.getTime();
+          int days = (int) (difference / (1000*60*60*24));
+          int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
+          int mins = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
+
+          String differenceString = sdf.format(hours);
+
+          Date myDate = new Date(difference);
+
+          String diff = sdf.format(myDate);
+
+          createdAtView.setText(diff);
+
+
+
+
+//        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+//        String createdAtString = formatter.format(event.getCreatedAt());
+//        createdAtView.setText(createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
           viewDetailsView.setOnClickListener(new OnClickListener() {
               public void onClick(View v) {
                   Log.d("debug", event.getText());
                   Intent intent = new Intent(MainActivity.this, ViewDetailsActivity.class);
                   intent.putExtra("eventID", event.getObjectId());
-                startActivity(intent);
-            }});
+                  startActivity(intent);
+              }
+          });
 
         return view;
       }

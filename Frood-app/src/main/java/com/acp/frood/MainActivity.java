@@ -1,12 +1,17 @@
 package com.acp.frood;
 
+import java.sql.Time;
+import java.text.DateFormat;
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -15,8 +20,11 @@ import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.text.Html;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -50,10 +58,18 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
+import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
+
+import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 public class MainActivity extends FragmentActivity implements LocationListener,
     GooglePlayServicesClient.ConnectionCallbacks,
@@ -101,10 +117,10 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   private static final float OFFSET_CALCULATION_ACCURACY = 0.01f;
 
   // Maximum results returned from a Parse query
-  private static final int MAX_POST_SEARCH_RESULTS = 50;
+  private static final int MAX_EVENT_SEARCH_RESULTS = 50;
 
   // Maximum post search radius for map in kilometers
-  private static final int MAX_POST_SEARCH_DISTANCE = 500;
+  private static final int MAX_EVENT_SEARCH_DISTANCE = 5; //was "50"
 
   /*
    * Other class member variables
@@ -123,7 +139,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   private final Map<String, Marker> mapMarkers = new HashMap<String, Marker>();
   private int mostRecentMapUpdate;
   private boolean hasSetUpInitialLocation;
-  private String selectedPostObjectId;
+  private String selectedEventObjectId;
   private Location lastLocation = new Location("");
   private Location currentLocation;
 
@@ -134,7 +150,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   private LocationClient locationClient;
 
   // Adapter for the Parse query
-  private ParseQueryAdapter<FroodPost> postsQueryAdapter;
+  private ParseQueryAdapter<FroodEvent> eventsQueryAdapter;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -158,72 +174,92 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Create a new location client, using the enclosing class to handle callbacks.
     locationClient = new LocationClient(this, this, this);
 
-    // Default location (Denmark)
-    lastLocation.setLatitude(55.786096);
-    lastLocation.setLongitude(10.736059);
+    // Default location (DTU, Denmark)
+    lastLocation.setLatitude(55.78402);
+    lastLocation.setLongitude(12.52029);
 
     // Set up a customized query
-    ParseQueryAdapter.QueryFactory<FroodPost> factory =
-        new ParseQueryAdapter.QueryFactory<FroodPost>() {
-          public ParseQuery<FroodPost> create() {
+    ParseQueryAdapter.QueryFactory<FroodEvent> factory =
+        new ParseQueryAdapter.QueryFactory<FroodEvent>() {
+          public ParseQuery<FroodEvent> create() {
             Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
-            ParseQuery<FroodPost> query = FroodPost.getQuery();
+            ParseQuery<FroodEvent> query = FroodEvent.getQuery();
             query.include("user");
             query.orderByDescending("createdAt");
             query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius * METERS_PER_FEET / METERS_PER_KILOMETER);
-            query.setLimit(MAX_POST_SEARCH_RESULTS);
+            query.setLimit(MAX_EVENT_SEARCH_RESULTS);
             return query;
           }
         };
 
 
-    // TODO Her kan jeg sætte flere parametre ind på main skærmen (hører til "frood_post_item.xml"
+    // TODO Her kan jeg sætte flere parametre ind på main skærmen (hører til "frood_event_item.xml"
 
     // Set up the query adapter
-    postsQueryAdapter = new ParseQueryAdapter<FroodPost>(this, factory) {
+    eventsQueryAdapter = new ParseQueryAdapter<FroodEvent>(this, factory) {
       @Override
-      public View getItemView(FroodPost post, View view, ViewGroup parent) {
+      public View getItemView(final FroodEvent event, View view, ViewGroup parent) {
         if (view == null) {
-          view = View.inflate(getContext(), R.layout.frood_post_item, null);
+          view = View.inflate(getContext(), R.layout.frood_event_item, null);
         }
         TextView contentView = (TextView) view.findViewById(R.id.content_view);
         TextView usernameView = (TextView) view.findViewById(R.id.username_view);
         TextView createdAtView = (TextView) view.findViewById(R.id.createdat_view);
-       // Button viewDetailsView = (Button) view.findViewById(R.id.view_details_btn);
-        contentView.setText(post.getText());
-        usernameView.setText(post.getUser().getUsername());
-        //TODO Inserted createdAt
-        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-        String createdAtString = formatter.format(post.getCreatedAt());
-        createdAtView.setText(createdAtString);
-        //viewDetailsView.setOnClickListener();
+        Button viewDetailsView = (Button) view.findViewById(R.id.view_details_btn);
+        contentView.setText(event.getText());
+        usernameView.setText("Shared by: " + event.getUser().getUsername());
+
+        //TODO Get elapsed time since creation
+          DateTime createdAt = new DateTime(event.getCreatedAt());
+          DateTime now = new DateTime();
+          Period period = new Period(createdAt, now);
+
+          PeriodFormatter formatter = new PeriodFormatterBuilder()
+                  .appendMinutes().appendSuffix(" minutes ")
+                  .appendHours().appendSuffix(" hours ")
+                  .appendDays().appendSuffix(" days ")
+                  .printZeroNever()
+                  .toFormatter();
+
+          String elapsed = formatter.print(period);
+          createdAtView.setText("Meal shared for:\n" + elapsed);
+
+
+//        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
+//        String createdAtString = formatter.format(event.getCreatedAt());
+//        createdAtView.setText(createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
+
+          viewDetailsView.setOnClickListener(new OnClickListener() {
+              public void onClick(View v) {
+                  Log.d("debug", event.getText());
+                  Intent intent = new Intent(MainActivity.this, ViewDetailsActivity.class);
+                  intent.putExtra("eventID", event.getObjectId());
+                  startActivity(intent);
+              }
+          });
 
         return view;
       }
     };
 
-/*      public void viewDetails(View view) {
-          Intent intent = new Intent(this, ViewDetailsActivity.class);
-      }*/
-
     // Disable automatic loading when the adapter is attached to a view.
-    postsQueryAdapter.setAutoload(false);
+    eventsQueryAdapter.setAutoload(false);
 
     // Disable pagination, we'll manage the query limit ourselves
-    postsQueryAdapter.setPaginationEnabled(false);
+    eventsQueryAdapter.setPaginationEnabled(false);
 
     // Attach the query adapter to the view
-    ListView postsListView = (ListView) findViewById(R.id.posts_listview);
-    postsListView.setAdapter(postsQueryAdapter);
+    ListView eventsListView = (ListView) findViewById(R.id.events_listview);
+    eventsListView.setAdapter(eventsQueryAdapter);
 
 
-    //TODO Make posts clickable and go to activity_post_details.xml
+    //TODO Make events clickable and go to activity_event_details.xml
     // Set up the handler for an item's selection
-    postsListView.setOnItemClickListener(new OnItemClickListener() {
+    eventsListView.setOnItemClickListener(new OnItemClickListener() {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final FroodPost item = postsQueryAdapter.getItem(position);
-            selectedPostObjectId = item.getObjectId();
+            final FroodEvent item = eventsQueryAdapter.getItem(position);
+            selectedEventObjectId = item.getObjectId();
             mapFragment.getMap().animateCamera(
                     CameraUpdateFactory.newLatLng(new LatLng(item.getLocation().getLatitude(), item
                             .getLocation().getLongitude())), new CancelableCallback() {
@@ -258,12 +294,24 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     });
 
 
-  // TODO Idea: Hijact this button to try and display the view details activity
-    // Set up the handler for the post button click
-    Button postButton = (Button) findViewById(R.id.post_button);
-    postButton.setOnClickListener(new OnClickListener() {
+  // TODO: only enable button if user has sharing privileges
+    // Set up the handler for the event button click
+    final Button eventButton = (Button) findViewById(R.id.event_button);
+    eventButton.setEnabled(true);
+    eventButton.setOnClickListener(new OnClickListener() {
         public void onClick(View v) {
-            // Only allow posts if we have a location
+//            // Only enable button if user has sharing privileges
+//            ParseQuery<ParseUser> roleQuery = ParseQuery.getQuery("Role");
+//            roleQuery.whereEqualTo("objectId", ParseUser.getCurrentUser());
+//            roleQuery.getFirstInBackground(new GetCallback<ParseUser>() {
+//                @Override
+//                public void done(ParseUser parseUser, ParseException e) {
+//                    if (parseObject != null) {
+//                        eventButton.setEnabled(true);
+//                }
+//            });
+
+            // Only allow events if we have a location
             Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
             if (myLoc == null) {
                 Toast.makeText(MainActivity.this,
@@ -271,36 +319,12 @@ public class MainActivity extends FragmentActivity implements LocationListener,
                 return;
             }
 
-            Intent intent = new Intent(MainActivity.this, PostActivity.class);
+            Intent intent = new Intent(MainActivity.this, EventActivity.class);
             intent.putExtra(Application.INTENT_EXTRA_LOCATION, myLoc);
             startActivity(intent);
         }
     });
 
-
-      // TODO Set up the handler for the view details button click
-
-/*      Button viewdetailsButton = (Button) findViewById(R.id.view_details_btn);
-
-      viewdetailsButton.setOnClickListener(new OnClickListener() {
-          public void onClick(View v) {
-              setContentView(R.layout.activity_view_details);
-          }
-      });*/
-
-/*      @Override
-      public boolean onCreateOptionsMenu(Menu menu) {
-          // Inflate the menu; this adds items to the action bar if it is present.
-          getMenuInflater().inflate(R.menu.main, menu);
-
-          menu.findItem(R.id.action_settings).setOnMenuItemClickListener(new OnMenuItemClickListener() {
-              public boolean onMenuItemClick(MenuItem item) {
-                  startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-                  return true;
-              }
-          });
-          return true;
-      }*/
 
   }
 
@@ -436,7 +460,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   }
 
   /*
-   * Called by Location Services when the request to connect the client finishes successfully. At
+   * Called by Location Services when the request to connect to the client finishes successfully. At
    * this point, you can request the current location or start periodic updates
    */
   public void onConnected(Bundle bundle) {
@@ -541,7 +565,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     if (myLoc != null) {
       // Refreshes the list view with new data based
       // usually on updated location data.
-      postsQueryAdapter.loadObjects();
+      eventsQueryAdapter.loadObjects();
     }
   }
 
@@ -558,21 +582,21 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     }
     final ParseGeoPoint myPoint = geoPointFromLocation(myLoc);
     // Create the map Parse query
-    ParseQuery<FroodPost> mapQuery = FroodPost.getQuery();
+    ParseQuery<FroodEvent> mapQuery = FroodEvent.getQuery();
     // Set up additional query filters
-    mapQuery.whereWithinKilometers("location", myPoint, MAX_POST_SEARCH_DISTANCE);
+    mapQuery.whereWithinKilometers("location", myPoint, MAX_EVENT_SEARCH_DISTANCE);
     mapQuery.include("user");
       //TODO Hvad der vises på kortet??
       //mapQuery.include("createdAt");
     mapQuery.orderByDescending("createdAt");
-    mapQuery.setLimit(MAX_POST_SEARCH_RESULTS);
+    mapQuery.setLimit(MAX_EVENT_SEARCH_RESULTS);
     // Kick off the query in the background
-    mapQuery.findInBackground(new FindCallback<FroodPost>() {
+    mapQuery.findInBackground(new FindCallback<FroodEvent>() {
       @Override
-      public void done(List<FroodPost> objects, ParseException e) {
+      public void done(List<FroodEvent> objects, ParseException e) {
         if (e != null) {
           if (Application.APPDEBUG) {
-            Log.d(Application.APPTAG, "An error occurred while querying for map posts.", e);
+            Log.d(Application.APPTAG, "An error occurred while querying for map events.", e);
           }
           return;
         }
@@ -584,20 +608,21 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         if (myUpdateNumber != mostRecentMapUpdate) {
           return;
         }
-        // Posts to show on the map
+        // TODO Fiddle more with map markers - does it make sense to not have some shown
+        // Events to show on the map
         Set<String> toKeep = new HashSet<String>();
         // Loop through the results of the search
-        for (FroodPost post : objects) {
-          // Add this post to the list of map pins to keep
-          toKeep.add(post.getObjectId());
-          // Check for an existing marker for this post
-          Marker oldMarker = mapMarkers.get(post.getObjectId());
+        for (FroodEvent event : objects) {
+          // Add this event to the list of map pins to keep
+          toKeep.add(event.getObjectId());
+          // Check for an existing marker for this event
+          Marker oldMarker = mapMarkers.get(event.getObjectId());
           // Set up the map marker's location
           MarkerOptions markerOpts =
-              new MarkerOptions().position(new LatLng(post.getLocation().getLatitude(), post
+              new MarkerOptions().position(new LatLng(event.getLocation().getLatitude(), event
                   .getLocation().getLongitude()));
           // Set up the marker properties based on if it is within the search radius
-          if (post.getLocation().distanceInKilometersTo(myPoint) > radius * METERS_PER_FEET
+          if (event.getLocation().distanceInKilometersTo(myPoint) > radius * METERS_PER_FEET
               / METERS_PER_KILOMETER) {
             // Check for an existing out of range marker
             if (oldMarker != null) {
@@ -624,17 +649,18 @@ public class MainActivity extends FragmentActivity implements LocationListener,
                 oldMarker.remove();
               }
             }
-            // Display a green marker with the post information
+            // TODO Should display remaining time instead of user, perhaps
+            // Display a green marker with the event information
             markerOpts =
-                markerOpts.title(post.getText()).snippet(post.getUser().getUsername())
+                markerOpts.title(event.getText()).snippet(event.getUser().getUsername())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
           }
           // Add a new marker
           Marker marker = mapFragment.getMap().addMarker(markerOpts);
-          mapMarkers.put(post.getObjectId(), marker);
-          if (post.getObjectId().equals(selectedPostObjectId)) {
+          mapMarkers.put(event.getObjectId(), marker);
+          if (event.getObjectId().equals(selectedEventObjectId)) {
             marker.showInfoWindow();
-            selectedPostObjectId = null;
+            selectedEventObjectId = null;
           }
         }
         // Clean up old markers.
@@ -672,9 +698,9 @@ public class MainActivity extends FragmentActivity implements LocationListener,
       mapCircle =
           mapFragment.getMap().addCircle(
               new CircleOptions().center(myLatLng).radius(radius * METERS_PER_FEET));
-      int baseColor = Color.DKGRAY;
+  int baseColor = Color.WHITE;                                                                        //was ".DKGRAY"
       mapCircle.setStrokeColor(baseColor);
-      mapCircle.setStrokeWidth(2);
+      mapCircle.setStrokeWidth(0);                                                                     //was "2"
       mapCircle.setFillColor(Color.argb(50, Color.red(baseColor), Color.green(baseColor),
           Color.blue(baseColor)));
     }

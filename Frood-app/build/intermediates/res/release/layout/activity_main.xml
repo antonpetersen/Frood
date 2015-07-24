@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:weightSum="100"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/event"
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
+        android:enabled="false"/>
+
+    <fragment
+        android:id="@+id/map_fragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_weight="50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        />
+
+    <ListView
+        android:id="@+id/events_listview"
+        android:layout_weight="50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="16dp"/>
+
+
+
+</LinearLayout><!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/activity_main.xml -->

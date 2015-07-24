@@ -58,11 +58,13 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
+import com.parse.ParseUser;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
@@ -213,14 +215,14 @@ public class MainActivity extends FragmentActivity implements LocationListener,
           Period period = new Period(createdAt, now);
 
           PeriodFormatter formatter = new PeriodFormatterBuilder()
-                  .appendMinutes().appendSuffix(" minutes ago\n")
-                  .appendHours().appendSuffix(" hours ago\n")
-                  .appendDays().appendSuffix(" days ago\n")
+                  .appendMinutes().appendSuffix(" minutes ")
+                  .appendHours().appendSuffix(" hours ")
+                  .appendDays().appendSuffix(" days ")
                   .printZeroNever()
                   .toFormatter();
 
           String elapsed = formatter.print(period);
-          createdAtView.setText(elapsed);
+          createdAtView.setText("Meal shared for:\n" + elapsed);
 
 
 //        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
@@ -292,11 +294,23 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     });
 
 
-  // TODO Idea: Hijact this button to try and display the view details activity
+  // TODO: only enable button if user has sharing privileges
     // Set up the handler for the event button click
-    Button eventButton = (Button) findViewById(R.id.event_button);
+    final Button eventButton = (Button) findViewById(R.id.event_button);
+    eventButton.setEnabled(true);
     eventButton.setOnClickListener(new OnClickListener() {
         public void onClick(View v) {
+//            // Only enable button if user has sharing privileges
+//            ParseQuery<ParseUser> roleQuery = ParseQuery.getQuery("Role");
+//            roleQuery.whereEqualTo("objectId", ParseUser.getCurrentUser());
+//            roleQuery.getFirstInBackground(new GetCallback<ParseUser>() {
+//                @Override
+//                public void done(ParseUser parseUser, ParseException e) {
+//                    if (parseObject != null) {
+//                        eventButton.setEnabled(true);
+//                }
+//            });
+
             // Only allow events if we have a location
             Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
             if (myLoc == null) {
@@ -446,7 +460,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   }
 
   /*
-   * Called by Location Services when the request to connect the client finishes successfully. At
+   * Called by Location Services when the request to connect to the client finishes successfully. At
    * this point, you can request the current location or start periodic updates
    */
   public void onConnected(Bundle bundle) {
@@ -594,6 +608,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         if (myUpdateNumber != mostRecentMapUpdate) {
           return;
         }
+        // TODO Fiddle more with map markers - does it make sense to not have some shown
         // Events to show on the map
         Set<String> toKeep = new HashSet<String>();
         // Loop through the results of the search
@@ -634,6 +649,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
                 oldMarker.remove();
               }
             }
+            // TODO Should display remaining time instead of user, perhaps
             // Display a green marker with the event information
             markerOpts =
                 markerOpts.title(event.getText()).snippet(event.getUser().getUsername())

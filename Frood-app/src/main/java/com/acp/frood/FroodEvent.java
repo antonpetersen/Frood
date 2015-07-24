@@ -26,8 +26,7 @@ public class FroodEvent extends ParseObject {
   }
 
   //TODO set event creator to attend the event
-
-
+    
 
   public void setUser(ParseUser value) {
     put("user", value);

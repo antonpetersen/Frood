@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/event"
-        android:textAppearance="?android:attr/textAppearanceSmallInverse"/>
+        android:textAppearance="?android:attr/textAppearanceSmallInverse"
+        android:enabled="false"/>
 
     <fragment
         android:id="@+id/map_fragment"

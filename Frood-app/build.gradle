@@ -10,11 +10,20 @@ android {
         minSdkVersion 11
         targetSdkVersion 19
     }
+    signingConfigs {
+        release {
+            storeFile file('/Users/anton/keys/my_key.keystore')
+            storePassword 'AcP.SecuRE!3'
+            keyAlias 'myApp'
+            keyPassword 'AcP.SecuRE!3'
+        }
+    }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -23,6 +32,6 @@ dependencies {
     compile project(':googleplayservices_lib')
     compile fileTree(dir: 'libs', include: 'Parse-*.jar')
     compile files('libs/android-support-v4.jar')
-    compile files ('libs/joda-time-2.8.1.jar')
+    compile files('libs/joda-time-2.8.1.jar')
     compile 'com.parse.bolts:bolts-android:1.+'
 }

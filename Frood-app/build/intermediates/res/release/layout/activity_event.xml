@@ -21,19 +21,6 @@
         <requestFocus />
     </EditText>
 
-    <!--
-    <EditText
-        android:id="@+id/post_portions"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_above="@+id/character_count_textview"
-        android:background="@null"
-        android:hint="@string/prompt_portions"
-        android:inputType="number"
-        android:gravity="top" >
-        <requestFocus />
-    </EditText>
-    -->
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -6,15 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
 
 import com.parse.ParsePush;
 import com.parse.ParseUser;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Activity that displays the settings screen.

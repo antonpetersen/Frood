@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
+import com.parse.ParsePush;
 import com.parse.ParseUser;
 
 /**
@@ -95,6 +96,7 @@ public class LoginActivity extends Activity {
           Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
         } else {
           // Start an intent for the dispatch activity
+          ParsePush.subscribeInBackground("DTU");
           Intent intent = new Intent(LoginActivity.this, DispatchActivity.class);
           intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
           startActivity(intent);

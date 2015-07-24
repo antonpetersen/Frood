@@ -113,18 +113,16 @@ public class EventActivity extends Activity {
             dialog.dismiss();
             Log.d("Saved???", "maybe");
             finish();
-            // TODO Set CountDownTimer
 
 
         }
     });
-    // TODO Move logic to server side - to avoid users spamming - https://www.parse.com/docs/android/guide#push-notifications
     // Push the event
     ParsePush push = new ParsePush();
     push.setChannel("DTU");
     push.setMessage(text);
     push.sendInBackground();
-    Log.d("rofl push", "apps");
+    Log.d("push", "apps");
   }
 
   private String getEventEditTextText() {

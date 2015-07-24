@@ -72,10 +72,6 @@
     <string msgid="1788179980625863495" name="common_google_play_services_update_title">Update Google Play services</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
-    <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
-    <eat-comment/>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
     <string name="error_blank_password">enter a password</string>
@@ -86,14 +82,10 @@
     <string name="error_mismatched_passwords">enter the same password twice</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
     <eat-comment/>
-    <string name="event">Share meal (Only with sharing privileges)</string>
+    <string name="event">Share meal</string>
     <string name="eventheader">Event header</string>
-    <string name="hello_world">Hello world!</string>
     <string name="login">Log in</string>
     <string name="logout_full">Log out of Frood</string>
-    <string name="parse">Parse</string>
-    <string name="post_out_of_range">Can\'t view post! Get closer.</string>
-    <string name="powered_by">Powered by</string>
     <string name="progress_event">Posting…</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings_activity_login.xml -->
     <eat-comment/>
@@ -111,7 +103,6 @@
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="search_distance">Search Distance</string>
-    <string name="settings_distance_format">%d feet</string>
     <string name="signup">Sign up</string>
     <string name="slogan">Free food, less food waste</string>
     <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/values/strings_activity_login.xml -->

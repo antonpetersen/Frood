@@ -1,17 +1,11 @@
 package com.acp.frood;
 
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -20,18 +14,17 @@ import android.content.IntentSender;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
-import android.text.Html;
-import android.text.format.DateUtils;
 import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MenuItem.OnMenuItemClickListener;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
@@ -57,14 +50,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseGeoPoint;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseQueryAdapter;
-import com.parse.ParseUser;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
@@ -84,31 +75,16 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   /*
    * Constants for location update parameters
    */
-  // Milliseconds per second
-  private static final int MILLISECONDS_PER_SECOND = 1000;
-
-  // The update interval
-  private static final int UPDATE_INTERVAL_IN_SECONDS = 5;
-
-  // A fast interval ceiling
-  private static final int FAST_CEILING_IN_SECONDS = 1;
 
   // Update interval in milliseconds
-  private static final long UPDATE_INTERVAL_IN_MILLISECONDS = MILLISECONDS_PER_SECOND
-      * UPDATE_INTERVAL_IN_SECONDS;
+  private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000 * 5;
 
   // A fast ceiling of update intervals, used when the app is visible
-  private static final long FAST_INTERVAL_CEILING_IN_MILLISECONDS = MILLISECONDS_PER_SECOND
-      * FAST_CEILING_IN_SECONDS;
+  private static final long FAST_INTERVAL_CEILING_IN_MILLISECONDS = 1000;
 
   /*
    * Constants for handling location results
    */
-  // Conversion from feet to meters
-  private static final float METERS_PER_FEET = 0.3048f;
-
-  // Conversion from kilometers to meters
-  private static final int METERS_PER_KILOMETER = 1000;
 
   // Initial offset for calculating the map bounds
   private static final double OFFSET_CALCULATION_INIT_DIFF = 1.0;
@@ -116,11 +92,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   // Accuracy for calculating the map bounds
   private static final float OFFSET_CALCULATION_ACCURACY = 0.01f;
 
-  // Maximum results returned from a Parse query
-  private static final int MAX_EVENT_SEARCH_RESULTS = 50;
 
-  // Maximum post search radius for map in kilometers
-  private static final int MAX_EVENT_SEARCH_DISTANCE = 5; //was "50"
 
   /*
    * Other class member variables
@@ -155,7 +127,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    radius = Application.getSearchDistance();
+    radius = 5;
     lastRadius = radius;
     setContentView(R.layout.activity_main);
 
@@ -182,18 +154,14 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     ParseQueryAdapter.QueryFactory<FroodEvent> factory =
         new ParseQueryAdapter.QueryFactory<FroodEvent>() {
           public ParseQuery<FroodEvent> create() {
-            Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
             ParseQuery<FroodEvent> query = FroodEvent.getQuery();
             query.include("user");
             query.orderByDescending("createdAt");
-            query.whereWithinKilometers("location", geoPointFromLocation(myLoc), radius * METERS_PER_FEET / METERS_PER_KILOMETER);
-            query.setLimit(MAX_EVENT_SEARCH_RESULTS);
+            query.setLimit(1000);
             return query;
           }
         };
 
-
-    // TODO Her kan jeg sætte flere parametre ind på main skærmen (hører til "frood_event_item.xml"
 
     // Set up the query adapter
     eventsQueryAdapter = new ParseQueryAdapter<FroodEvent>(this, factory) {
@@ -209,7 +177,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         contentView.setText(event.getText());
         usernameView.setText("Shared by: " + event.getUser().getUsername());
 
-        //TODO Get elapsed time since creation
+        //Get time elapsed since creation
           DateTime createdAt = new DateTime(event.getCreatedAt());
           DateTime now = new DateTime();
           Period period = new Period(createdAt, now);
@@ -223,11 +191,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
 
           String elapsed = formatter.print(period);
           createdAtView.setText("Meal shared for:\n" + elapsed);
-
-
-//        Format formatter = new SimpleDateFormat("HH:mm:ss dd-MM-yyyy");
-//        String createdAtString = formatter.format(event.getCreatedAt());
-//        createdAtView.setText(createdAtString);              //tv.setText(Html.fromHtml("<strong>bold</strong> and <em>italic</em> "));
 
           viewDetailsView.setOnClickListener(new OnClickListener() {
               public void onClick(View v) {
@@ -252,8 +215,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     ListView eventsListView = (ListView) findViewById(R.id.events_listview);
     eventsListView.setAdapter(eventsQueryAdapter);
 
-
-    //TODO Make events clickable and go to activity_event_details.xml
     // Set up the handler for an item's selection
     eventsListView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -293,23 +254,11 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         }
     });
 
-
-  // TODO: only enable button if user has sharing privileges
     // Set up the handler for the event button click
     final Button eventButton = (Button) findViewById(R.id.event_button);
     eventButton.setEnabled(true);
     eventButton.setOnClickListener(new OnClickListener() {
         public void onClick(View v) {
-//            // Only enable button if user has sharing privileges
-//            ParseQuery<ParseUser> roleQuery = ParseQuery.getQuery("Role");
-//            roleQuery.whereEqualTo("objectId", ParseUser.getCurrentUser());
-//            roleQuery.getFirstInBackground(new GetCallback<ParseUser>() {
-//                @Override
-//                public void done(ParseUser parseUser, ParseException e) {
-//                    if (parseObject != null) {
-//                        eventButton.setEnabled(true);
-//                }
-//            });
 
             // Only allow events if we have a location
             Location myLoc = (currentLocation == null) ? lastLocation : currentLocation;
@@ -365,7 +314,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     Application.getConfigHelper().fetchConfigIfNeeded();
 
     // Get the latest search distance preference
-    radius = Application.getSearchDistance();
+    radius = 5;
     // Checks the last saved location to show cached data if it's available
     if (lastLocation != null) {
       LatLng myLatLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
@@ -584,12 +533,11 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // Create the map Parse query
     ParseQuery<FroodEvent> mapQuery = FroodEvent.getQuery();
     // Set up additional query filters
-    mapQuery.whereWithinKilometers("location", myPoint, MAX_EVENT_SEARCH_DISTANCE);
+    mapQuery.whereWithinKilometers("location", myPoint, 1000);
     mapQuery.include("user");
-      //TODO Hvad der vises på kortet??
       //mapQuery.include("createdAt");
     mapQuery.orderByDescending("createdAt");
-    mapQuery.setLimit(MAX_EVENT_SEARCH_RESULTS);
+    mapQuery.setLimit(1000);
     // Kick off the query in the background
     mapQuery.findInBackground(new FindCallback<FroodEvent>() {
       @Override
@@ -608,7 +556,6 @@ public class MainActivity extends FragmentActivity implements LocationListener,
         if (myUpdateNumber != mostRecentMapUpdate) {
           return;
         }
-        // TODO Fiddle more with map markers - does it make sense to not have some shown
         // Events to show on the map
         Set<String> toKeep = new HashSet<String>();
         // Loop through the results of the search
@@ -622,24 +569,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
               new MarkerOptions().position(new LatLng(event.getLocation().getLatitude(), event
                   .getLocation().getLongitude()));
           // Set up the marker properties based on if it is within the search radius
-          if (event.getLocation().distanceInKilometersTo(myPoint) > radius * METERS_PER_FEET
-              / METERS_PER_KILOMETER) {
-            // Check for an existing out of range marker
-            if (oldMarker != null) {
-              if (oldMarker.getSnippet() == null) {
-                // Out of range marker already exists, skip adding it
-                continue;
-              } else {
-                // Marker now out of range, needs to be refreshed
-                oldMarker.remove();
-              }
-            }
-            // Display a red marker with a predefined title and no snippet
-            markerOpts =
-                markerOpts.title(getResources().getString(R.string.post_out_of_range)).icon(
-                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-          } else {
-            // Check for an existing in range marker
+           // Check for an existing in range marker
             if (oldMarker != null) {
               if (oldMarker.getSnippet() != null) {
                 // In range marker already exists, skip adding it
@@ -649,12 +579,12 @@ public class MainActivity extends FragmentActivity implements LocationListener,
                 oldMarker.remove();
               }
             }
-            // TODO Should display remaining time instead of user, perhaps
+
             // Display a green marker with the event information
             markerOpts =
                 markerOpts.title(event.getText()).snippet(event.getUser().getUsername())
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-          }
+
           // Add a new marker
           Marker marker = mapFragment.getMap().addMarker(markerOpts);
           mapMarkers.put(event.getObjectId(), marker);
@@ -697,7 +627,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     if (mapCircle == null) {
       mapCircle =
           mapFragment.getMap().addCircle(
-              new CircleOptions().center(myLatLng).radius(radius * METERS_PER_FEET));
+              new CircleOptions().center(myLatLng).radius(radius * 1000));
   int baseColor = Color.WHITE;                                                                        //was ".DKGRAY"
       mapCircle.setStrokeColor(baseColor);
       mapCircle.setStrokeWidth(0);                                                                     //was "2"
@@ -705,7 +635,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
           Color.blue(baseColor)));
     }
     mapCircle.setCenter(myLatLng);
-    mapCircle.setRadius(radius * METERS_PER_FEET); // Convert radius in feet to meters.
+    mapCircle.setRadius(radius * 1000); // Convert radius in feet to meters.
   }
 
   /*
@@ -725,7 +655,7 @@ public class MainActivity extends FragmentActivity implements LocationListener,
     // The return offset, initialized to the default difference
     double latLngOffset = OFFSET_CALCULATION_INIT_DIFF;
     // Set up the desired offset distance in meters
-    float desiredOffsetInMeters = radius * METERS_PER_FEET;
+    float desiredOffsetInMeters = radius * 1000;
     // Variables for the distance calculation
     float[] distance = new float[1];
     boolean foundMax = false;

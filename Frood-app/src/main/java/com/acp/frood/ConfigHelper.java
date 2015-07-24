@@ -25,7 +25,7 @@ public class ConfigHelper {
         @Override
         public void done(ParseConfig parseConfig, ParseException e) {
           if (e == null) {
-            // Yay, retrieved successfully
+            // Retrieved successfully
             config = parseConfig;
             configLastFetchedTime = System.currentTimeMillis();
           } else {
@@ -35,22 +35,6 @@ public class ConfigHelper {
         }
       });
     }
-  }
-
-  public List<Float> getSearchDistanceAvailableOptions() {
-    final List<Float> defaultOptions = Arrays.asList(250.0f, 1000.0f, 2000.0f, 5000.0f);
-
-    List<Number> options = config.getList("availableFilterDistances");
-    if (options == null) {
-      return defaultOptions;
-    }
-
-    List<Float> typedOptions = new ArrayList<Float>();
-    for (Number option : options) {
-      typedOptions.add(option.floatValue());
-    }
-
-    return typedOptions;
   }
 
   public int getEventMaxCharacterCount() {

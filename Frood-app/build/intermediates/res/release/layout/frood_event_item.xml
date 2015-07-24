@@ -56,28 +56,4 @@
     </RelativeLayout>
 
 </LinearLayout>
-
-<!--<RelativeLayout-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="50dp">-->
-
-<!--<TextView-->
-    <!--android:id="@+id/character_count_textview"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentLeft="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:text="@string/character_count_placeholder"-->
-    <!--android:textAppearance="?android:attr/textAppearanceSmall"-->
-    <!--android:gravity="center_vertical|center_horizontal"/>-->
-
-<!--<Button-->
-    <!--android:id="@+id/event_button"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentRight="true"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:text="@string/event"-->
-    <!--android:gravity="center_vertical"/>-->
-<!--</RelativeLayout>-->
 <!-- From: file:/Users/anton/AndroidStudioProjects/Frood/Frood-app/src/main/res/layout/frood_event_item.xml -->
